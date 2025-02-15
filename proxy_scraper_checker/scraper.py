@@ -63,14 +63,7 @@ async def scrape_one(
         proxies = tuple(PROXY_REGEX.finditer(text))
         if not proxies:
             _logger.warning("%s | No proxies found", source)
-        elif (
-            settings.proxies_per_source_limit
-            and len(proxies) > settings.proxies_per_source_limit
-        ):
-            _logger.warning(
-                "%s has too many proxies (%d), skipping", source, len(proxies)
-            )
-        else:
+            else:
             for proxy in proxies:
                 try:
                     protocol = ProxyType[
